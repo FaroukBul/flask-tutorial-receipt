@@ -17,16 +17,16 @@
     <td class="{{ field }}">
         {{ product['description'] }}
     </td>
-    {% endif %}
-    {% if field == 'total' %}
+    
+    {% elif field == 'total' %}
     <td class="{{ field }}">
         {{ product['total'] }}
     </td>
-    {% endif %}
+    {% else %}
 
     <td class="{{ field }}">
-        {{ field }}
     </td>
+    {% endif %}
     {% endfor %}
     
     
