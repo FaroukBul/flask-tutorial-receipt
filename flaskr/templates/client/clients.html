@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<head>
+    <h1 class="title">Clients</h1>
+<div class="main-body">
+    <table class="table-clients">
+        <tr class="columns">
+            <th>Name</th>
+            <th>Address</th>
+            <th>e-Mail</th>
+            <th>Phone</th>
+        </tr>
+        {% for client in clients %}
+            <tr>
+                <th>
+                    {{ client["name"] }}
+                    <a href="{{ url_for('client.update_client', id=client['id']) }}" 
+                    class="btn btn-secondary">
+                    Update
+                    </a>
+                </th>
+                <th>{{ client["address"] }}</th>
+                <th>{{ client["e_mail"] }}</th>
+                <th>{{ client["phone"] }}</th>
+
+            </tr>
+        {% endfor %}
+    </table>
+
+</div>
+</head>
+{% endblock %}

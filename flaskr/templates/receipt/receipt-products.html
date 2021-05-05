@@ -1,0 +1,36 @@
+{% for product in products %}
+<tr id="product-table-tr">
+
+    <td>
+        <form method="post">
+            <input type="number"id="quantity" name="quantity" >
+         
+    </td>
+    <td>     
+            <input id="name" name="name" >
+            <input type="submit" class="submit">
+        </form>
+        {{ product['name'] }}
+    </td>
+    {% for field in fields %}
+    {% if field == 'description' %}
+    <td class="{{ field }}">
+        {{ product['description'] }}
+    </td>
+    {% endif %}
+    {% if field == 'total' %}
+    <td class="{{ field }}">
+        {{ product['total'] }}
+    </td>
+    {% endif %}
+
+    <td class="{{ field }}">
+        {{ field }}
+    </td>
+    {% endfor %}
+    
+    
+
+</tr>
+
+{% endfor %}

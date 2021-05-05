@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="title">Update Client</h1>
+<form method="post">
+    {% for field in fields %}
+        <label for="{{ field }}">{{ field }}</label>
+        <input name="{{ field }}" id="{{ field }}" value="{{ client[field] }}">
+    {% endfor %}
+    <input type="submit" class="submit">
+</form>
+{% endblock %}
