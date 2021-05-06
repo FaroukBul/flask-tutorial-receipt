@@ -15,18 +15,6 @@ def create_app():
     except OSError:
         pass
     
-    from . import db
-    db.init_app(app)
-
-    from . import product
-    app.register_blueprint(product.bp)
-
-    from . import client
-    app.register_blueprint(client.bp)
-
-    from . import receipt
-    app.register_blueprint(receipt.bp)
-    
     return app
 
 
