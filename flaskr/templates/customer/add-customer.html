@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h1>Add Customer</h1>
+{% endblock %}
+
+
+{% block content %}
+<div class="title-container">
+    <h1 class="title">Add Customer</h1>
+</div>
+
+
+<form method="post" class="add">
+{% for customer_head in customer_heads %}
+{% if customer_head != 'id'%}
+    <div class="label-div">
+        <label for="{{ customer_head }}" class="inpul-label">{{ customer_head }}</label>
+    </div>
+    <div class="input-div">
+        <input name="{{ customer_head }}" class="input-customer">
+    </div>
+{% endif %}
+{% endfor %}
+<input type="submit" class="submit-btn">
+</form>
+
+{% endblock %}

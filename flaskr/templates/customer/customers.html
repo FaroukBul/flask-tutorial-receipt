@@ -6,14 +6,14 @@
 
 {% block content %}
 <table>
+    {% for customer in customers %}
     <tr>
-        {{ customer["name"] }}
+        {% for head in heads %}
+        <td>
+            {{ customer[head] }}
+        </td>
+        {% endfor %}
     </tr>
-    <tr>
-        {{ customer["address"] }}
-    </tr>
-    <tr>
-        {{ customer["email"] }}
-    </tr>
+    {% endfor %}
 </table>
 {% endblock %}
