@@ -1,0 +1,36 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.title{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(8, 165, 118)
+}
+
+.title-container, .add{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-customer{
+    width: 100%; 
+}
+
+.input-div {
+    width: 30%;
+    margin-left: 10px;
+}
+
+.submit-btn{
+    height: 30px;
+    width: 60px;
+    background-color: rgb(202, 79, 89);
+    border: 0px;
+    border-radius: 5px;
+    color: white;
+    margin-top: 20px;
+}
+
+
+
