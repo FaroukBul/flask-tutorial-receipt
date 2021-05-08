@@ -6,7 +6,7 @@
     color: rgb(8, 165, 118)
 }
 
-.title-container, .add{
+.title-container, .add, .update{
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -14,7 +14,7 @@
 }
 
 .input-customer, .input-product{
-    width: 100%; 
+    width: 100%;
 }
 
 .input-div {
@@ -35,10 +35,20 @@
 nav{
     display: flex; 
     flex-direction: row;
+    justify-content: center;
+    border-bottom: 1px solid rgb(6, 163, 184);
 }
 
+nav div{
+    margin: 20px
+}
+
+nav a {
+    text-decoration: none;
+}
 .customers, .products{
-    border: 1px solid black;
+    display: grid;
+    justify-content: center;
     border-collapse: collapse;
 }
 
@@ -46,5 +56,51 @@ td{
     border: 1px solid black;
     border-collapse: collapse;
     padding: 10px; 
+}
+
+a {
+    text-decoration: none;
+}
+
+.main-container{
+    display: flex;
+    justify-content: center;
+}
+
+.receipt{
+    margin-top: 10%;
+    border: 1px solid black;
+    height: 20em;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.receipt-client {
+    border: 1px solid black;
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+
+
+.client-info-block {
+    height: 5em;
+}
+
+.table-client-receipt{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+
+
+.client-info div {
+    border: 1px solid black;
+    width: 80%;
+    height: 80%;
 }
 

@@ -47,7 +47,7 @@ def add():
 
 
 @bp.route('/update/<int:customer_id>', methods=('GET', 'POST'))
-def update_customer(customer_id):
+def update(customer_id):
     customer = Customer.get(customer_id)
 
     if request.method == 'POST':

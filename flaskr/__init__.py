@@ -26,6 +26,9 @@ def create_app():
     from . import product
     app.register_blueprint(product.bp)
 
+    from . import receipt
+    app.register_blueprint(receipt.bp)
+
     return app
 
 
