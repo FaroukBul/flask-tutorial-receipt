@@ -2,23 +2,23 @@
 
 {% block content %}
 <div class="title-container">
-    <h1>Update Product</h1>
+    <h1 class="title">Update Product</h1>
 </div>
 
-<div class="update">
-    <form method="post" >
-        {% for head in heads %}
-        {% if heads != id %}
-        <div class="label-div">
-            <label for="{{ head }}" class="input-label">{{ head }}</label>
-        </div>
-        <div>
-            <input type="text" value="{{ product[head] }}" name="{{ head }}" id="{{ head }}"
-        </div>
-        {% endif %}
-        {% endfor %}
-            <input type="submit" class="submit-btn">
-    </form>
-</div>
+
+<form method="post" class="update" >
+    {% for head in heads %}
+    {% if heads != id %}
+    <div class="label-div">
+        <label for="{{ head }}" class="input-label">{{ head }}</label>
+    </div>
+    <div class="input-div">
+        <input type="text" value="{{ product[head] }}" name="{{ head }}" id="{{ head }}" class="input-product">
+    </div>
+    {% endif %}
+    {% endfor %}
+        <input type="submit" class="submit-btn">
+</form>
+
 
 {% endblock %}
