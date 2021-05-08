@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<table>
+<table class="customers">
     {% for customer in customers %}
     <tr>
         {% for head in heads %}
@@ -13,6 +13,9 @@
             {{ customer[head] }}
         </td>
         {% endfor %}
+        <td>
+            <a href="{{ url_for('customer.delete', customer_id=customer.id) }}">Delete</a>
+        </td>
     </tr>
     {% endfor %}
 </table>

@@ -15,7 +15,7 @@ class Product(db.Model):
         db.session.add(self)
         commit_to_db()
 
-    def update():
+    def update(self):
         commit_to_db()
     
     def delete(self):

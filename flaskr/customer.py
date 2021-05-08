@@ -1,8 +1,8 @@
 from flask import (
-    Blueprint, render_template, request
+    Blueprint, render_template, request, url_for, redirect
 )
-from flaskr.models import Customer
-bp = Blueprint("customer", __name__)
+from flaskr.models.customer import Customer
+bp = Blueprint("customer", __name__, url_prefix='/customer')
 
 
 customer_heads = {
@@ -11,9 +11,9 @@ customer_heads = {
     'email': 'email'
 }
 
-@bp.route('/')
+@bp.route('/customers')
 def customers():
-    customers = Customer.query.all()
+    customers = Customer.get_all()
     
     return render_template(
         "customer/customers.html",
@@ -22,8 +22,8 @@ def customers():
     )
 
 
-@bp.route('/add-customer', methods=('GET', 'POST'))
-def add_customer():
+@bp.route('/add', methods=('GET', 'POST'))
+def add():
     form_add_customer ={}
     for key in customer_heads:
         form_add_customer[key] = ""
@@ -38,11 +38,37 @@ def add_customer():
             email=form_add_customer['email']
         )
         customer.add()
+        
 
     return render_template(
-        'customer/add-customer.html',
+        'customer/add.html',
         customer_heads=customer_heads
     )
 
 
+@bp.route('/update/<int:customer_id>', methods=('GET', 'POST'))
+def update_customer(customer_id):
+    customer = Customer.get(customer_id)
 
+    if request.method == 'POST':
+        customer.name = request.form["name"]
+        customer.address = request.form["address"]
+        customer.email = request.form["email"]
+
+        customer.update()
+
+    return render_template(
+        'customer/update.html',
+        heads=customer_heads, 
+        customer=customer
+    )
+
+
+@bp.route('/delete/<int:customer_id>')
+def delete(customer_id):
+    customer = Customer.get(customer_id)
+    customer.delete()
+
+    return redirect(
+        url_for('customer.customers')
+    )

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h1>Add Product</h1>
+{% endblock %}
+
+
+{% block content %}
+<div class="title-container">
+    <h1 class="title">Add Product</h1>
+</div>
+
+
+<form method="post" class="add">
+{% for product_head in product_heads %}
+{% if product_head != 'id'%}
+    <div class="label-div">
+        <label for="{{ product_head }}" class="inpul-label">{{ product_head }}</label>
+    </div>
+    <div class="input-div">
+        <input name="{{ product_head }}" class="input-product">
+    </div>
+{% endif %}
+{% endfor %}
+<input type="submit" class="submit-btn">
+</form>
+
+{% endblock %}

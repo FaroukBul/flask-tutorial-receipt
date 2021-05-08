@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h1>Products</h1>
+{% endblock %}
+
+{% block content %}
+<table class="products">
+    {% for product in products %}
+    <tr>
+        {% for head in heads %}
+        <td>
+            {{ product[head] }}
+            <a href="{{ url_for('product.delete', product_id=product.id) }}">Delete</a>
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

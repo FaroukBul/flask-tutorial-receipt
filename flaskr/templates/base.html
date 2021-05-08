@@ -6,6 +6,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>{% block title %}{% endblock %}</title>
 </head>
+<nav>
+    <div >
+        <a href="{{ url_for('customer.add') }}">Add Customer</a>
+    </div>
+    <div>
+        <a href="{{ url_for('customer.customers') }}">Customers</a>
+    </div>
+    <div >
+        <a href="{{ url_for('product.add') }}">Add Product</a>
+    </div>
+
+
+</nav>
 <body>
     {% block content %}
     {% endblock %}
