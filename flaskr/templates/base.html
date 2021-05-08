@@ -16,8 +16,12 @@
     <div >
         <a href="{{ url_for('product.add') }}">Add Product</a>
     </div>
-
-
+    <div>
+        <a href="{{ url_for('product.products') }}">Products</a>
+    </div>
+    <div>
+        <a href="{{ url_for('receipt.receipt') }}">Receipt</a>
+    </div>
 </nav>
 <body>
     {% block content %}
