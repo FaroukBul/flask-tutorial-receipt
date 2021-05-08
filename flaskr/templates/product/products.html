@@ -5,15 +5,27 @@
 {% endblock %}
 
 {% block content %}
+<div class="title-container">
+    <h1 class="title">Products</h1>
+</div>
 <table class="products">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
     {% for product in products %}
     <tr>
         {% for head in heads %}
         <td>
             {{ product[head] }}
-            <a href="{{ url_for('product.delete', product_id=product.id) }}">Delete</a>
         </td>
         {% endfor %}
+        <td>
+            <a href="{{ url_for('product.delete', product_id=product.id) }}">❌</a>
+            <br>
+            <a href="{{ url_for('product.update', product_id=product.id) }}">Update</a>
+        </td>
     </tr>
     {% endfor %}
 </table>
