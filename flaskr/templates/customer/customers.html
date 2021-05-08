@@ -5,7 +5,17 @@
 {% endblock %}
 
 {% block content %}
+<div class="title-container">
+    <h1 class="title">Customers</h1> 
+</div>
+
+
 <table class="customers">
+    <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>e-mail</th>
+      </tr>
     {% for customer in customers %}
     <tr>
         {% for head in heads %}
@@ -14,7 +24,9 @@
         </td>
         {% endfor %}
         <td>
-            <a href="{{ url_for('customer.delete', customer_id=customer.id) }}">Delete</a>
+            <a href="{{ url_for('customer.delete', customer_id=customer.id) }}">❌</a>
+            <br>
+            <a href="{{ url_for('customer.update', customer_id=customer.id) }}">Update</a>
         </td>
     </tr>
     {% endfor %}
