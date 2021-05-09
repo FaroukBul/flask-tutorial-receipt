@@ -36,6 +36,11 @@ class Customer(db.Model):
         
         return customer
     
+    @property
+    def request(self):
+        from .request import CustomerRequest
+        return CustomerRequest(self)
+    
 
 
         

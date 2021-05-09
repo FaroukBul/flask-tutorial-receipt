@@ -104,3 +104,11 @@ a {
     height: 80%;
 }
 
+.flash{
+    background-color: aquamarine;
+    color: rgb(131, 33, 74);
+    text-align: center;
+    padding: 1em;
+    margin: 1em;
+}
+

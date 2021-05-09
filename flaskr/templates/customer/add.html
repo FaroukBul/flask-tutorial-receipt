@@ -12,15 +12,13 @@
 
 
 <form method="post" class="add">
-{% for customer_head in customer_heads %}
-{% if customer_head != 'id'%}
-    <div class="label-div">
-        <label for="{{ customer_head }}" class="inpul-label">{{ customer_head }}</label>
-    </div>
-    <div class="input-div">
-        <input name="{{ customer_head }}" class="input-customer">
-    </div>
-{% endif %}
+{% for head in customer_heads %}
+<div class="label-div">
+    <label for="{{ head }}" class="inpul-label">{{ head }}</label>
+</div>
+<div class="input-div">
+    <input name="{{ head }}" class="input-customer" value="{{ form[head] }}">
+</div>
 {% endfor %}
 <input type="submit" class="submit-btn">
 </form>

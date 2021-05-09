@@ -10,6 +10,7 @@ def commit_to_db():
     try:
         db.session.commit()
     except IntegrityError:
+        db.session.rollback()
         raise ValueError from None
 
 

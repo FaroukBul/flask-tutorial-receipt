@@ -1,7 +1,9 @@
 from flask import (
-    Blueprint, render_template, request, url_for, redirect
+    Blueprint, render_template, request, url_for, 
+    redirect, flash
 )
 from flaskr.models.customer import Customer
+from . import get_form
 bp = Blueprint("customer", __name__, url_prefix='/customer')
 
 
@@ -24,26 +26,26 @@ def customers():
 
 @bp.route('/add', methods=('GET', 'POST'))
 def add():
-    form_add_customer ={}
-    for key in customer_heads:
-        form_add_customer[key] = ""
-    
+    form = get_form(request, customer_heads)
     if request.method == "POST":
-        for key in form_add_customer:
-            form_add_customer[key] = request.form[key]
-
         customer = Customer(
-            name=form_add_customer["name"],
-            address=form_add_customer["address"],
-            email=form_add_customer['email']
+            name=form["name"],
+            address=form["address"],
+            email=form['email']
         )
-        customer.add()
-        
+        error = customer.request.add()
+        if not error:
+            return redirect(
+                url_for('customer.customers')
+            )
+        flash(error)
 
     return render_template(
         'customer/add.html',
-        customer_heads=customer_heads
+        customer_heads=customer_heads,
+        form=form
     )
+
 
 
 @bp.route('/update/<int:customer_id>', methods=('GET', 'POST'))
@@ -51,11 +53,12 @@ def update(customer_id):
     customer = Customer.get(customer_id)
 
     if request.method == 'POST':
-        customer.name = request.form["name"]
-        customer.address = request.form["address"]
-        customer.email = request.form["email"]
-
-        customer.update()
+        error = customer.request.update()
+        if not error:
+            return redirect(
+                url_for('customer.customers')
+            )
+        flash(error)
 
     return render_template(
         'customer/update.html',
