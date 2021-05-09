@@ -2,7 +2,7 @@ from sqlalchemy import (
     Column, Integer, String, 
     Text, Float
 )
-from . import db, commit_to_db
+from flaskr.models import db, commit_to_db
 
 
 class Product(db.Model):

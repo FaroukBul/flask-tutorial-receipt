@@ -17,16 +17,16 @@ def create_app():
     db.init_app(app)
     app.cli.add_command(init_db_command)
 
-    from .import home
+    from .views import home
     app.register_blueprint(home.bp)
 
-    from . import customer
+    from .views import customer
     app.register_blueprint(customer.bp)
 
-    from . import product
+    from .views import product
     app.register_blueprint(product.bp)
 
-    from . import receipt
+    from .views import receipt
     app.register_blueprint(receipt.bp)
 
     return app

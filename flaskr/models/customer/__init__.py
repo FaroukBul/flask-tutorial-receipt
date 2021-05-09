@@ -1,7 +1,7 @@
 from sqlalchemy import (
     Column, Integer, String
 )
-from . import db, commit_to_db
+from flaskr.models import db, commit_to_db
 
 
 class Customer(db.Model): 
