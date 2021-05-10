@@ -6,6 +6,20 @@ from flask.cli import with_appcontext
 db = SQLAlchemy()
 
 
+class MyModel:
+
+    def add(self):
+        db.session.add(self)
+        commit_to_db()
+    
+    def update(self):
+        commit_to_db()
+    
+    def delete(self):
+        db.session.delete(self)
+        commit_to_db()
+
+
 def commit_to_db():
     try:
         db.session.commit()
