@@ -26,7 +26,7 @@ def customers():
 
 @bp.route('/add', methods=('GET', 'POST'))
 def add():
-    form = get_form(request, customer_heads)
+    form = get_form(customer_heads)
     if request.method == "POST":
         customer = Customer(
             name=form["name"],
