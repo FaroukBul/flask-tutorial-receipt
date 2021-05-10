@@ -1,6 +1,7 @@
+from flask import request
 
 
-def get_form(request, heads):
+def get_form(heads):
     form = {}
     for head in heads:
         try:

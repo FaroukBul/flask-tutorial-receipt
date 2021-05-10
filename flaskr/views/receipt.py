@@ -8,7 +8,6 @@ bp = Blueprint('receipt', __name__, url_prefix='/receipt')
 
 @bp.route('/receipt')
 def receipt():
-
     return render_template(
         'receipt/receipt.html',
     )

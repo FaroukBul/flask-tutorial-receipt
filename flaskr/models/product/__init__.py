@@ -2,25 +2,14 @@ from sqlalchemy import (
     Column, Integer, String, 
     Text, Float
 )
-from flaskr.models import db, commit_to_db
+from flaskr.models import db, MyModel
 
 
-class Product(db.Model):
+class Product(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False, unique=True)
     description = Column(Text(1000), nullable=False)
     price = Column(Float, nullable=False, default=0)
-
-    def add(self):
-        db.session.add(self)
-        commit_to_db()
-
-    def update(self):
-        commit_to_db()
-    
-    def delete(self):
-        db.session.delete(self)
-        commit_to_db()
     
     def search(search_term):
        return Product.query.filter_by(name=search_term)
@@ -30,5 +19,11 @@ class Product(db.Model):
     
     def get_all():
         return Product.query.all()
+
+    @property
+    def request(self):
+        from .request import ProductRequest
+        return ProductRequest(self)
+
 
     
