@@ -64,10 +64,11 @@ class CustomerRequest:
 
     def validate_email(self):
         error = None
-        if "@" not in self.customer.name:
+        if "@" not in self.customer.email:
             error = "Invalid email"
         
         return error
+
 
 
     

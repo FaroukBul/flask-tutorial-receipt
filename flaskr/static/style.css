@@ -92,7 +92,6 @@ a {
 }
 
 .table-client-receipt{
-    border: 1px solid black;
     border-collapse: collapse;
 }
 
@@ -100,8 +99,6 @@ a {
 
 .client-info div {
     border: 1px solid black;
-    width: 80%;
-    height: 80%;
 }
 
 .flash{

@@ -1,0 +1,25 @@
+<table class="table-client-receipt">
+    <tr>
+    {% for head in heads %}
+        <th>
+           {{ head }}
+        </th>
+    {% endfor %}
+    </tr>
+    <tr>
+    <form method="post">
+        {% for head in heads %}
+        {% if customer != None %}
+        <td class="client-info-block">
+            <input type="text" name="{{ head }}" id="{{ head }}" value="{{ customer[head] }}">
+        </td>
+        {% else %}
+        <td class="client-info-block">
+            <input type="text" name="{{ head }}" id="{{ head }}">
+        </td>
+        {% endif %}
+        {% endfor %}
+        <input type="submit" class="submit-btn">
+    </form>
+    </tr>
+</table>

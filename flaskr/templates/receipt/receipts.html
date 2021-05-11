@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<h1>Products</h1>
+{% endblock %}
+
+{% block content %}
+<div class="title-container">
+    <h1 class="title">Products</h1>
+</div>
+<table class="products">
+    <tr>
+        <th>Name</th>
+        <th>id</th>
+      </tr>
+    {% for receipt in receipts %}
+    <tr>
+        <td>
+            {{ receipt.author.name }}
+        </td>
+        <td>
+            {{ receipt.id }}
+        </td>
+        <td>
+            <a href="{{ url_for('receipt.update', receipt_id=receipt.id) }}">Update</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

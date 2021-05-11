@@ -9,6 +9,12 @@ class Customer(db.Model, MyModel):
     name = Column(String(100), unique=True, nullable=False)
     address = Column(String(150), unique=True, nullable=False)
     email = Column(String(50), unique=True, nullable=False)
+    receipts = db.relationship(
+        'Receipt',
+        backref='author',
+        lazy=True,
+        cascade="all, delete-orphan"
+    )
 
     def get(id):
         return Customer.query.get(id)
@@ -17,11 +23,11 @@ class Customer(db.Model, MyModel):
         return Customer.query.all()
     
     def search(search_term):
-        customer = Customer.query.filter_by(name=search_term)
+        customer = Customer.query.filter_by(name=search_term).first()
         if customer is None:
-            customer = Customer.query.filter_by(email=search_term)
+            customer = Customer.query.filter_by(email=search_term).first()
         if customer is None:
-            customer = Customer.query.filter_by(address=search_term)
+            customer = Customer.query.filter_by(address=search_term).first()
         
         return customer
     

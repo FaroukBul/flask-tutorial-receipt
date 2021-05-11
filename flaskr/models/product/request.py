@@ -27,7 +27,6 @@ class ProductRequest:
 
         error = self.validate()
         if not error:
-            print("no funciono")
             try:
                 self.product.update()
             except ValueError:
