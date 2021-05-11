@@ -20,8 +20,12 @@
         <a href="{{ url_for('product.products') }}">Products</a>
     </div>
     <div>
-        <a href="{{ url_for('receipt.receipt') }}">Receipt</a>
+        <a href="{{ url_for('receipt.add') }}">Add Receipt</a>
     </div>
+    <div>
+        <a href="{{ url_for('receipt.receipts') }}">Receipts</a>
+    </div>
+   
 </nav>
 <body>
     {% for message in get_flashed_messages() %}
