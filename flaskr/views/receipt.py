@@ -34,6 +34,7 @@ def receipts():
 
 @bp.route('/add', methods=('GET', 'POST'))
 def add():
+    receipt = None
     form = get_form(receipt_customer_heads)
     if request.method == 'POST':
         customer = Customer.search(form['name'])
@@ -42,13 +43,24 @@ def add():
                 customer_id=customer.id
             )
             receipt.add()
-    
+
+    if receipt is not None:
+        return render_template(
+            'receipt/add.html',
+            heads=receipt_customer_heads,
+            product_heads=product_heads,
+            receipt=receipt,
+            customer=None
+        )
+        
     return render_template(
-        'receipt/add.html',
-        heads=receipt_customer_heads,
-        product_heads=product_heads,
-        customer=None
-    )
+            'receipt/add.html',
+            heads=receipt_customer_heads,
+            product_heads=product_heads,
+            receipt=receipt,
+            customer=None
+        )
+    
 
 @bp.route('/update/<int:receipt_id>', methods=('GET', 'POST'))
 def update(receipt_id):
@@ -63,7 +75,7 @@ def update(receipt_id):
         'receipt/update.html',
         customer=receipt.author,
         receipt=receipt,
-        heads=receipt_heads
+        heads=receipt_customer_heads
     )
 
 

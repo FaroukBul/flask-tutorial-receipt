@@ -22,4 +22,13 @@
         <input type="submit" class="submit-btn">
     </form>
     </tr>
+    <tr>
+        {% if receipt != None %}
+        {% for head in heads %}
+        <td>
+            <p>{{ receipt.author[head] }}</p>
+        </td>
+        {% endfor %}
+        {% endif %}
+    </tr>
 </table>

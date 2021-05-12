@@ -12,11 +12,12 @@
                 </th>
             {% endfor %}
             </tr>
-            
-            <tr>   
+            <tr> 
             {% for sold_product in sold_products %}
             {% for head in heads %}
-                {{ sold_product.product.head}}
+                <td>
+                    {{ sold_product.product.head}}
+                </td>
             {% endfor %}
             {% endfor %}
             </tr>

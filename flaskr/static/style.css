@@ -84,7 +84,10 @@ a {
     align-items: flex-end;
 }
 
-
+.client-info, .product-display{
+    display: flex;
+    justify-content: center;
+}
 
 .client-info-block {
     height: 5em;
@@ -112,4 +115,5 @@ a {
     border: 1px solid black;
     border-collapse: collapse;
 }
+
 

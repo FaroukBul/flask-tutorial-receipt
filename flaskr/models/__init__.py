@@ -8,6 +8,9 @@ db = SQLAlchemy()
 
 class MyModel:
 
+    def __repr__(self):
+        return self.__dict__
+
     def add(self):
         db.session.add(self)
         commit_to_db()
