@@ -3,14 +3,12 @@
 {% block content %}
 <div class="main-container">
     <div class="receipt">
-        <div class="receipt-client">
             <div class="client-info">
-            {% include 'receipt/client-table.html' %}
+            {% include 'receipt/customer-info.html' %}
             </div>
 
-        </div>
         <div class="receipt-product">
-
+            {% include 'receipt/products.html' %}
         </div>
     </div>
 

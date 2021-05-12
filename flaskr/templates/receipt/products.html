@@ -1,0 +1,25 @@
+<div class='receipt-search-product'>
+    <form method="post">
+        <input type="text" name="name" >
+        <input type="submit" name="submit-product" class="submit-btn">
+    </form>
+    <div class="product-display">
+        <table class="products-receipt">
+            <tr>
+            {% for head in product_heads %}
+                <th>
+                    {{ head }}
+                </th>
+            {% endfor %}
+            </tr>
+            
+            <tr>   
+            {% for sold_product in sold_products %}
+            {% for head in heads %}
+                {{ sold_product.product.head}}
+            {% endfor %}
+            {% endfor %}
+            </tr>
+        </table>
+    </div>
+</div>

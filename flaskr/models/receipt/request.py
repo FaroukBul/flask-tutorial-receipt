@@ -1,12 +1,12 @@
 from flask import request
 from flaskr.models.customer import Customer
-
+from . import SoldProduct
 
 class ReceiptRequest:
 
-    def __init__(self):
-        self.customer = Customer.get(self.customer_id)
+    def __init__(self, receipt):
         self.receipt = receipt
+        self.customer = receipt.author
         self.heads = [
             'name',
             'address',
@@ -14,30 +14,27 @@ class ReceiptRequest:
         ]
         self.msg = "There can't be any empty fields"
     
-    def add(self):
+    def update(self):
+        sold_product = SoldProduct(
+            product_id=1,
+            receipt_id=self.receipt.id
+        )
+        sold_product.add()
         error = self.validate()
         if error is None:
-            try:
-                self.receipt.add()
-            except ValueError:
-                return "Cant save, check for empty fields"
-    
-    def update(self):
-        self.customer.name = request.form["name"]
-        self.customer.address = request.form['address']
-        self.customer.email = request.form['email']
+            self.update_customer()
 
-        error = self.validate()
-        if error is None: 
-            try:
-                self.receipt.update()
-            except ValueError:
-                return self.msg
-    
-    def validate(self):
-        for head in self.heads:
-            value = getattr(self.customer, head)
-            if value == "":
-                return self.msg
+        return error
         
-        return None
+    def update_customer(self):
+        self.customer.update()
+        
+    def validate(self):
+        self.customer.request.update_attributes()
+        error = self.customer.request.validate()
+        
+        return error
+
+    
+
+

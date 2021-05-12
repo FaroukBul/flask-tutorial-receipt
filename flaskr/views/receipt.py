@@ -1,6 +1,6 @@
 from flask import (
     Blueprint, render_template, request, 
-    redirect, url_for
+    redirect, url_for, flash
 )
 
 from . import get_form
@@ -9,10 +9,16 @@ from flaskr.models.customer import Customer
 bp = Blueprint('receipt', __name__, url_prefix='/receipt')
 
 
-receipt_heads = [
+receipt_customer_heads = [
     'name',
     'address',
     'email'
+]
+
+product_heads = [
+    'name',
+    'description',
+    'price'
 ]
 
 @bp.route('/receipts')
@@ -22,23 +28,25 @@ def receipts():
     return render_template(
         'receipt/receipts.html',
         receipts=receipts,
-        heads=receipt_heads
+        heads=receipt_customer_heads,
     )
 
 
 @bp.route('/add', methods=('GET', 'POST'))
 def add():
-    form = get_form(receipt_heads)
+    form = get_form(receipt_customer_heads)
     if request.method == 'POST':
         customer = Customer.search(form['name'])
-        receipt = Receipt(
-            customer_id=customer.id
-        )
-        receipt.add()
+        if customer:
+            receipt = Receipt(
+                customer_id=customer.id
+            )
+            receipt.add()
     
     return render_template(
         'receipt/add.html',
-        heads=receipt_heads,
+        heads=receipt_customer_heads,
+        product_heads=product_heads,
         customer=None
     )
 
@@ -48,14 +56,13 @@ def update(receipt_id):
     
     if request.method == 'POST':
         error = receipt.request.update()
-        if not error:
-            return redirect(
-                url_for('receipt.receipts')
-            )
-
+        if error:
+            flash(error)
+            
     return render_template(
         'receipt/update.html',
         customer=receipt.author,
+        receipt=receipt,
         heads=receipt_heads
     )
 

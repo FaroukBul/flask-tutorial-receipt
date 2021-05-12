@@ -68,12 +68,11 @@ a {
 }
 
 .receipt{
-    margin-top: 10%;
-    border: 1px solid black;
-    height: 20em;
     width: 80%;
+    border: 1px solid black;
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .receipt-client {
@@ -107,5 +106,10 @@ a {
     text-align: center;
     padding: 1em;
     margin: 1em;
+}
+
+.products-receipt, td, th , tr{
+    border: 1px solid black;
+    border-collapse: collapse;
 }
 
