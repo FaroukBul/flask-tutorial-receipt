@@ -10,6 +10,12 @@ class Product(db.Model, MyModel):
     name = Column(String(100), nullable=False, unique=True)
     description = Column(Text(1000), nullable=False)
     price = Column(Float, nullable=False, default=0)
+    sold_products = db.relationship(
+        'SoldProduct',
+        backref='product',
+        lazy=True, 
+        cascade='all, delete-orphan'
+    )
     
     def search(search_term):
        return Product.query.filter_by(name=search_term)
@@ -26,4 +32,3 @@ class Product(db.Model, MyModel):
         return ProductRequest(self)
 
 
-    

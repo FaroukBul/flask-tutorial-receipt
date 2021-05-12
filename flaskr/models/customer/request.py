@@ -23,10 +23,7 @@ class CustomerRequest:
         return error 
 
     def update(self):    
-        self.customer.name = request.form["name"]
-        self.customer.address = request.form["address"]
-        self.customer.email = request.form["email"]
-
+        self.update_attributes()
         error = self.validate()
         if not error:
             try:
@@ -36,13 +33,18 @@ class CustomerRequest:
         
         return error
 
+    def update_attributes(self):
+        self.customer.name = request.form["name"]
+        self.customer.address = request.form["address"]
+        self.customer.email = request.form["email"]
+
     def validate(self):
         error =  self.check_for_empty_values()
         if not error:
             error = self.validate_name()
         if not error:
             error = self.validate_email()
-
+        print(error)
         return error
 
     def check_for_empty_values(self):
