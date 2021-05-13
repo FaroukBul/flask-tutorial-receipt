@@ -18,7 +18,7 @@ class Product(db.Model, MyModel):
     )
     
     def search(search_term):
-       return Product.query.filter_by(name=search_term)
+        return Product.query.filter_by(name=search_term).first()
        
     def get(id):
         return Product.query.get(id)

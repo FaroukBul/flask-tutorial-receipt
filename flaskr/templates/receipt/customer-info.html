@@ -7,11 +7,12 @@
     {% endfor %}
     </tr>
     <tr>
+    {% if customer != None %}
     <form method="post">
         {% for head in heads %}
-        {% if customer != None %}
+        {% if receipt != None %}
         <td class="client-info-block">
-            <input type="text" name="{{ head }}" id="{{ head }}" value="{{ customer[head] }}">
+            <input type="text" name="{{ head }}" id="{{ head }}" value="{{ receipt.author[head] }}">
         </td>
         {% else %}
         <td class="client-info-block">
@@ -21,6 +22,7 @@
         {% endfor %}
         <input type="submit" class="submit-btn">
     </form>
+    {% endif %}
     </tr>
     <tr>
         {% if receipt != None %}

@@ -116,4 +116,7 @@ a {
     border-collapse: collapse;
 }
 
-
+.product-box {
+    min-width: 200px;
+    min-height: 30px ;
+}

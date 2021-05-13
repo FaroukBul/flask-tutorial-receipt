@@ -1,13 +1,13 @@
 <div class='receipt-search-product'>
     <form method="post">
-        <input type="text" name="name" >
+        <input type="text" name="name" id="name" value="Product">
         <input type="submit" name="submit-product" class="submit-btn">
     </form>
     <div class="product-display">
         <table class="products-receipt">
             <tr>
             {% for head in product_heads %}
-                <th>
+                <th class="product-box">
                     {{ head }}
                 </th>
             {% endfor %}
@@ -15,8 +15,8 @@
             <tr> 
             {% for sold_product in sold_products %}
             {% for head in heads %}
-                <td>
-                    {{ sold_product.product.head}}
+                <td class="product-box">
+                    {{ sold_product.product.head }}
                 </td>
             {% endfor %}
             {% endfor %}
