@@ -23,7 +23,10 @@
             {{ receipt.id }}
         </td>
         <td>
-            <a href="{{ url_for('receipt.update', receipt_id=receipt.id) }}">Update</a>
+            <a href="{{ url_for('receipt.update', receipt_id=receipt.id, refresh=True) }}">Update</a>
+        </td>
+        <td>
+            <a href="{{ url_for('receipt.delete_receipt', receipt_id=receipt.id) }}">❌</a>
         </td>
     </tr>
     {% endfor %}
