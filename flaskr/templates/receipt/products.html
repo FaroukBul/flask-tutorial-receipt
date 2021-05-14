@@ -12,15 +12,22 @@
                 </th>
             {% endfor %}
             </tr>
-            <tr> 
+            <tr>
+            {% if sold_products != None %}
             {% for sold_product in sold_products %}
-            {% for head in heads %}
+            <tr>
+                {% for head in product_heads %}
                 <td class="product-box">
-                    {{ sold_product.product.head }}
+                    {{ sold_product.product[head] }}
                 </td>
-            {% endfor %}
-            {% endfor %}
+                {% endfor %}
+                <td>
+                    <a href="{{ url_for('receipt.delete_product', receipt_id=receipt.id, product_id=sold_product.product.id) }}">❌</a>
+                </td>
             </tr>
+            {% endfor %}
+            {% endif %}
+            
         </table>
     </div>
 </div>
