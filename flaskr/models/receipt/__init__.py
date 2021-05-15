@@ -35,6 +35,8 @@ class SoldProduct(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     receipt_id = Column(Integer, ForeignKey('receipt.id'), nullable=False)
     product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
+    quantity = Column(Integer)
+    total =  Column(Float)
     
     def search_receipt(search_term):
         search_result = SoldProduct.query.filter_by(receipt_id=search_term).all()
@@ -46,4 +48,6 @@ class SoldProduct(db.Model, MyModel):
             if product.product.id == product_id:
                 product.delete()
 
-  
+    def get(id):
+        return SoldProduct.query.filter_by(id=id).first()
+
