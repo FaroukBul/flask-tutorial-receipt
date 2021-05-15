@@ -20,10 +20,16 @@ receipt_customer_heads = [
 product_heads = [
     'name',
     'description',
-    'price'
+    'price',
+    'total'
 ]
 
-product_input = ['name']
+product_input = [
+    'name',
+    'quantity',
+    'id_product'
+    ]
+quantity_input = ['quantity']
 
 
 @bp.route('/receipts')
@@ -63,22 +69,36 @@ def add():
 @bp.route('/update/<int:receipt_id>', methods=('GET', 'POST'))
 def update(receipt_id):
     error = "Product already selected"
+    error_blank = "Cant submit empty fields"
     product = None
     receipt = Receipt.get(receipt_id)
     sold_products = SoldProduct.search_receipt(receipt_id)
     if request.method == 'POST':
         form = get_form(product_input)
         product = Product.search(form['name'])
-        for sold in sold_products:
-            if sold.product.id == product.id:
-                flash(error)
+        if product:
+            for sold in sold_products:
+                if sold.product.id == product.id:
+                    flash(error)
+                    return redirect(
+                        url_for('receipt.update', receipt_id=receipt.id)
+                    )
+            sold_product = SoldProduct(product_id=product.id, receipt_id=receipt.id)
+            sold_product.quantity = 1
+            sold_product.total = product.price
+            sold_product.add()
+            sold_products = SoldProduct.search_receipt(receipt_id)
+        else:
+            if form['name'] == 'Product':
+                flash(error_blank)
                 return redirect(
-                    url_for('receipt.update', receipt_id=receipt.id)
-                )
-        sold_product = SoldProduct(product_id=product.id, receipt_id=receipt.id)
-        sold_product.add()
-        sold_products = SoldProduct.search_receipt(receipt_id)
-        print(sold_products)
+                            url_for('receipt.update', receipt_id=receipt.id)
+                        )
+            else:
+                add_quantity(form['quantity'], form['id_product'])
+                sold_products = SoldProduct.search_receipt(receipt_id)
+    receipt_total = get_receipt_total(receipt_id)
+
     
     return render_template(
         'receipt/update.html',
@@ -87,7 +107,8 @@ def update(receipt_id):
         receipt=receipt,
         heads=receipt_customer_heads,
         product_heads=product_heads,
-        sold_products=sold_products
+        sold_products=sold_products, 
+        receipt_total=receipt_total
     )
 
 
@@ -104,4 +125,22 @@ def delete_receipt(receipt_id):
     receipt.delete()
 
     return redirect(url_for('receipt.receipts', receipt_id=receipt_id))
+
+
+def add_quantity(quantity ,sold_product_id):
+    product = SoldProduct.get(sold_product_id)
+    product.quantity = quantity
+    product_price = product.product.price
+    product.total = product_price * int(quantity)
+    product.update()
+
+
+def get_receipt_total(receipt_id):
+    receipts = SoldProduct.search_receipt(receipt_id)
+    total = 0
+    for receipt in receipts:
+        total += receipt.total
+
+    return total
+
 
