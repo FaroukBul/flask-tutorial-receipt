@@ -4,30 +4,6 @@
         <input type="submit" name="submit-product" class="submit-btn">
     </form>
     <div class="product-display">
-        <table class="products-receipt">
-            <tr>
-            {% for head in product_heads %}
-                <th class="product-box">
-                    {{ head }}
-                </th>
-            {% endfor %}
-            </tr>
-            <tr>
-            {% if sold_products != None %}
-            {% for sold_product in sold_products %}
-            <tr>
-                {% for head in product_heads %}
-                <td class="product-box">
-                    {{ sold_product.product[head] }}
-                </td>
-                {% endfor %}
-                <td>
-                    <a href="{{ url_for('receipt.delete_product', receipt_id=receipt.id, product_id=sold_product.product.id) }}">❌</a>
-                </td>
-            </tr>
-            {% endfor %}
-            {% endif %}
-            
-        </table>
+        {% include 'receipt/table-products.html' %}
     </div>
 </div>

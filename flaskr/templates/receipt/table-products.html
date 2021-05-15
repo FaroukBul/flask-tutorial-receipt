@@ -1,0 +1,46 @@
+<table class="products-receipt">
+    <tr>
+        <th>
+            Quantity
+        </th>
+    {% for head in product_heads %}
+       <th class="product-box">
+            {{ head }}
+        </th>
+    {% endfor %}
+    </tr>
+    {% if sold_products != None %}
+    {% for sold_product in sold_products %}
+    <tr>
+        <td class="td-quantity">
+            <form method="post">
+                <input type="number" name="quantity" class="quantity-input" value="{{ sold_product.quantity }}">
+                <input type="number" name="id_product" class="id_product" value="{{ sold_product.id }}">
+                <input type="submit" name="submit-quantity" class="submit-quantity" value="Add">
+            </form>
+        </td>
+        {% for head in product_heads %}
+        {% if head != quantity %}
+        <td class="td-{{head}}">
+            {% if head == 'total' %}
+                {{ sold_product.total }}
+            {% endif %}
+            {{ sold_product.product[head] }}
+        </td>
+        {% endif %}
+        {% endfor %}
+        <td class="td-delete">
+            <a href="{{ url_for('receipt.delete_product', receipt_id=receipt.id, product_id=sold_product.product.id) }}">❌</a>
+        </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+    <tr>
+        <td colspan="4">
+            Receipt Total
+        </td>
+        <td>
+            {{ receipt_total }}
+        </td>
+    </tr>
+</table>

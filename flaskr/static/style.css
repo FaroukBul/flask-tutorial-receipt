@@ -111,18 +111,54 @@ a {
     margin: 1em;
 }
 
-.products-receipt, td, th , tr{
-    border: 1px solid black;
-    border-collapse: collapse;
+.receipt-product{
+    display: flex;
+    justify-content: center;
 }
 
-.product-box {
-    min-width: 200px;
-    min-height: 30px ;
+ td, th , tr{
+    border: 1px solid black;
+    border-collapse: collapse;
 }
 
 .products-receipt{
     display:flex;
     flex-direction: row;
-    
+    width: 100%;
+}
+
+.products-receipt > tr {
+    display:flex;
+}
+
+.quantity-input{
+    width: 50px
+}
+
+.id_product{
+    display: none;
+}
+
+.submit-quantity{
+    height: 20px;
+    width: 40px;
+    background-color: rgb(61, 150, 101);
+    border: 0px;
+    border-radius: 5px;
+    color: white;
+    margin-top: 20px;
+}
+
+.td-quantity, .td-name, .td-description, .td-price, .td-delete {
+    height: 10px;
+    padding: 0px 10px 0px 10px
+}
+
+.td-quantity{
+    text-align: center;
+}
+
+.td-quantity > form {
+    padding: 0;
+    margin: 0;
 }
